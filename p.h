@@ -10,14 +10,14 @@ typedef struct PriorityQueue {
 } PriorityQueue;
 
 // Initializes a new priority queue
-PriorityQueue* initPriorityQueue(PriorityQueue* queue ) {
-    queue = malloc(sizeof(PriorityQueue));
+PriorityQueue* initPriorityQueue() {
+    PriorityQueue * queue = malloc(sizeof(PriorityQueue));
     queue->head = NULL;
     return queue;
 }
 
 // Adds a new element with the given data and priority to the queue
-void enqueue(PriorityQueue* queue, int data, int priority) {
+void enqueue(PriorityQueue* queue,int data, int priority) {
     Node* new_node = malloc(sizeof(Node));
     new_node->data = data;
     new_node->priority = priority;
