@@ -23,8 +23,7 @@ int counting;
     else if((traverse(p3->high)/length(p3->high))<(traverse(p1->high)/length(p1->high)) && (traverse(p3->high)/length(p3->high))<(traverse(p2->high)/length(p2->high)) && (traverse(p3->high)/length(p3->high))<(traverse(p4->high)/length(p4->high))){
         return p3;
     }
-    else if ((traverse(p4->high)/length(p4->high))<(traverse(p1->high)/length(p195]
-    \]\\->high)) && (traverse(p4->high)/length(p4->high))<(traverse(p3->high)/length(p3->high)) && (traverse(p4->high)/length(p4->high))<(traverse(p2->high)/length(p2->high))){
+    else if ((traverse(p4->high)/length(p4->high))<(traverse(p1->high)/length(p1->high)) && (traverse(p4->high)/length(p4->high))<(traverse(p3->high)/length(p3->high)) && (traverse(p4->high)/length(p4->high))<(traverse(p2->high)/length(p2->high))){
         return p4;
 
     }
@@ -191,26 +190,26 @@ Station* minmeantimelow(Station* p1, Station* p2, Station* p3, Station* p4) {
 
 int main(){
     ////////////////////////////////////////////////
-    Node* arr1[3];
+    EV* arr1[3];
     for(int i=0;i<3;i++){
         arr1[i]=NULL;
     }
-    Node* arr2[3];
+    EV* arr2[3];
     for(int i=0;i<3;i++){
         arr2[i]=NULL;
     }
-     Node* arr3[3];
+     EV* arr3[3];
     for(int i=0;i<3;i++){
         arr3[i]=NULL;
     }
-     Node* arr4[3];
+     EV* arr4[3];
     for(int i=0;i<3;i++){
         arr4[i]=NULL;
     }
-    Node* hp1[2];
-    Node* hp2[2];
-    Node* hp3[2];
-    Node* hp4[2];
+    EV* hp1[2];
+    EV* hp2[2];
+    EV* hp3[2];
+    EV* hp4[2];
 
     for(int i=0;i<2;i++){
         hp1[i]=NULL;
@@ -272,14 +271,18 @@ int main(){
         if(prio>50){
             Station* tempo=minmeantimehigh(s1,s2,s3,s4);
             enqueue(tempo->high, 45,timing, prio, ptr);
-            printf("%d",dequeue(s1->low)->chargingtime);
+            printf("%d",dequeue(s1->high));
 
-        
+
+
+
+
+
         }
         else{
             Station* tempo=minmeantimelow(s1,s2,s3,s4);
             enqueue(tempo->low, 54,timing, prio, ptr);
-            printf("%d", dequeue(tempo->low)->chargingtime);
+            printf("%d", dequeue(tempo->low));
            
         }
 
@@ -292,8 +295,8 @@ int main(){
           
         }
         
-        else if(a=='i'){
-            /*countros=1;
+        else if(a=="i"){
+            countros=1;
             ////////////////////////////////////////station 1
             for(int z=0;z<3;z++){
                 if(arr1[z]==NULL && countros==1 ){
@@ -367,7 +370,6 @@ int main(){
                 }
             }
             ////////////////////////////////////////////this is done now it is time to make a timer which will increase after every loop and check if the time is equal to
-            printf("%d", arr1[0]->chargingtime );*/
 
 
 
@@ -380,7 +382,6 @@ int main(){
             
 
             counting++;
-            printf("hello world");
         }
         
 
@@ -392,11 +393,3 @@ int main(){
        }
 
        
-
-    
-
-
-
-
-
-
