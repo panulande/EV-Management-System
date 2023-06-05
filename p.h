@@ -5,17 +5,22 @@
 
 
 typedef struct EV_user{
-    int id;
-    int battery_capacity;
-    int charging_rate;
+    char* lastname;
+    char* username;
+    int charging;
+    int timing;
+    int tobecharged;
+    int diff;
 
 }EV;
 typedef struct Node {
     int data;
-    int chargingtime;
+    int chargingtime;////////////////////
     int priority;
     struct Node* next;
     EV* ev;
+    char* username;//////////////////////////
+    char* lastname;
 
 } Node;
 
@@ -35,19 +40,20 @@ PriorityQueue* initPriorityQueue() {
 typedef struct Station{
     PriorityQueue* high;
     PriorityQueue* low;
-    int *chargingpoint;
+ 
 
 
 }Station;
 
 // Adds a new element with the given data and priority to the queue
-void enqueue(PriorityQueue* queue,int data,int chargingtime, int priority, EV* ptr) {
-    Node* new_node = malloc(sizeof(Node));
-    new_node->data = data;
-    new_node->chargingtime = chargingtime;
-
+void enqueue(PriorityQueue* queue,int data,int timing,int priority, EV* ptr) {
+    Node* new_node = (Node*)malloc(sizeof(Node));
+   
+    
+    new_node->data=data;
     new_node->priority = priority;
     new_node->ev=ptr;
+    new_node->chargingtime=timing;
 
     if (queue->head == NULL || priority < queue->head->priority) {
         new_node->next = queue->head;
@@ -59,7 +65,9 @@ void enqueue(PriorityQueue* queue,int data,int chargingtime, int priority, EV* p
         }
         new_node->next = current_node->next;
         current_node->next = new_node;
+
     }
+    printf("\nThe user named %s %s with charging of ev %d has been added to the queue\n",ptr->username, ptr->lastname,ptr->charging);
 }
 
 // Removes and returns the element with the highest priority from the queue
@@ -73,7 +81,9 @@ Node* dequeue(PriorityQueue* queue) {
         EV* evv=dequeued_node->ev;
         queue->head = queue->head->next;
         dequeued_node->next=NULL;
+        printf("\nThe user named %s %s with charging of ev %d has been removed from the queue\n",evv->username,evv->lastname, evv->charging);
         //free(dequeued_node);
+       
         return dequeued_node;
     }
 }
@@ -87,35 +97,7 @@ int peek(PriorityQueue* queue) {
         return queue->head->data;
     }
 }
-/*int traverse(PriorityQueue* queue) {
-    int count=0;
-    if(queue->head == NULL) {
-        return 0;
-    } else {
-        Node* temp = queue->head;
-        while(temp != NULL) {
-            count += temp->chargingtime;
-            temp = temp->next;
-        }
-    }
-    return count;
-}
 
-
-
-int length(PriorityQueue* queue) {
-    if(queue->head == NULL) {
-        return 0;
-    } else {
-        Node* temp = queue->head;
-        int count = 0;
-        while(temp != NULL) {
-            count++;
-            temp = temp->next;
-        }
-        return count;
-    }
-}*/
 
 int traverse(PriorityQueue* queue) {
     int count = 0;
@@ -124,7 +106,7 @@ int traverse(PriorityQueue* queue) {
     } else {
         Node* temp = queue->head;
         while (temp != NULL) {
-            count += temp->chargingtime;
+            count += temp->ev->diff;
             temp = temp->next;
         }
         return count;
@@ -151,16 +133,99 @@ int isPriorityQueueEmpty(PriorityQueue* queue) {
     return (queue->head == NULL);
 }
 
-EV* initEV( int charging, int username, int time_counter,EV* ptr){
+EV* initEV( int charge, int charged, int difference, int time,EV* ptr, char* pointer, char* ointer){
 
-    ptr->battery_capacity=charging;
-    ptr->charging_rate=time_counter;
-    ptr->id=username;
+    ptr->charging=charge;
+    ptr->timing=time;
+    ptr->tobecharged=charged;
+    ptr->diff=difference;
+    ptr->username=pointer;
+    ptr->lastname=ointer;;
     return ptr;
 
 
 
 }
 
+typedef struct Record {
+    int id;
+    int arrcharging;
+    int gocharging;
+    int money;
+    char* username;
+    char* lastname;
+
+
+    // Add more fields as needed
+} Record;
+
+// Structure to represent a node in the BST
+typedef struct Hero {
+    Record data;
+    struct Hero* left;
+    struct Hero* right;
+} Hero;
+
+// Function to create a new node
+Hero* createNode(Record data) {
+    Hero* newNode = (Hero*)malloc(sizeof(Hero));
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+// Function to insert a record into the BST
+Hero* insert(Hero* root, Record data) {
+    if (root == NULL) {
+        return createNode(data);
+    } else if (data.id < root->data.id) {
+        root->left = insert(root->left, data);
+    } else if (data.id > root->data.id) {
+        root->right = insert(root->right, data);
+    }
+    return root;
+}
+
+
+// Function to search for a record in the BST
+Hero* search(Hero* root, int id) {
+    if (root == NULL || root->data.id == id) {
+        return root;
+    } else if (id < root->data.id) {
+        return search(root->left, id);
+    } else {
+        return search(root->right, id);
+    }
+}
+
+// Function to display the contents of the database
+void displayDatabase(Hero* root) {
+    if (root != NULL) {
+        displayDatabase(root->left);
+        printf("ID: %d, User: %s %s, ArrivalC: %d, DepartureC: %d, Charges:Rs. %d\n ", root->data.id,root->data.username,root->data.lastname, root->data.arrcharging,root->data.gocharging, (root->data.gocharging,root->data.gocharging-root->data.arrcharging)*17);
+        displayDatabase(root->right);
+    }
+}
+
+int arrayfullhigh(Node* arr[]){
+    if ((arr[0] != NULL) && (arr[2] != NULL) && (arr[4] != NULL))
+    {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+int arrayfulllow(Node* arr[]){
+       if ((arr[1] != NULL) && (arr[3] != NULL))
+    {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+    
+
+
 #endif
-       
