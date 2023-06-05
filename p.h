@@ -4,23 +4,24 @@
 
 
 
-typedef struct EV_user{
-    char* lastname;
-    char* username;
-    int charging;
-    int timing;
-    int tobecharged;
-    int diff;
+typedef struct EV_user{ 
+    char* lastname; //
+    char* username;//
+    int charging;//
+    int timing; //not using this
+    int tobecharged;//
+    int diff;//
 
 }EV;
+//
 typedef struct Node {
-    int data;
-    int chargingtime;////////////////////
+    int data; //not needed
+    int chargingtime;////////////////////Not needed
     int priority;
     struct Node* next;
     EV* ev;
-    char* username;//////////////////////////
-    char* lastname;
+    char* username;//////////////////////////not needed
+    char* lastname;////////not needed
 
 } Node;
 
@@ -88,18 +89,10 @@ Node* dequeue(PriorityQueue* queue) {
     }
 }
 
-// Returns the data of the element with the highest priority in the queue without removing it
-int peek(PriorityQueue* queue) {
-    if (queue->head == NULL) {
-        printf("Error: Queue is empty.\n");
-        return -1;
-    } else {
-        return queue->head->data;
-    }
-}
 
 
-int traverse(PriorityQueue* queue) {
+int traverse(PriorityQueue* queue) {  //charging count
+
     int count = 0;
     if (queue->head == NULL) {
         return count;
@@ -111,7 +104,7 @@ int traverse(PriorityQueue* queue) {
         }
         return count;
     }
-}
+} //to calculate the charging every vehicle want to do
 
 int length(PriorityQueue* queue) {
     int count = 0;
@@ -128,23 +121,16 @@ int length(PriorityQueue* queue) {
 }
 
 
-// Returns 1 if the queue is empty, 0 otherwise
-int isPriorityQueueEmpty(PriorityQueue* queue) {
-    return (queue->head == NULL);
-}
 
-EV* initEV( int charge, int charged, int difference, int time,EV* ptr, char* pointer, char* ointer){
+EV* initEV( int charge, int charged, int difference, EV* ptr, char* pointer, char* ointer){
 
     ptr->charging=charge;
-    ptr->timing=time;
+    //ptr->timing=time;
     ptr->tobecharged=charged;
     ptr->diff=difference;
     ptr->username=pointer;
-    ptr->lastname=ointer;;
+    ptr->lastname=ointer;
     return ptr;
-
-
-
 }
 
 typedef struct Record {
@@ -189,15 +175,15 @@ Hero* insert(Hero* root, Record data) {
 
 
 // Function to search for a record in the BST
-Hero* search(Hero* root, int id) {
-    if (root == NULL || root->data.id == id) {
-        return root;
-    } else if (id < root->data.id) {
-        return search(root->left, id);
-    } else {
-        return search(root->right, id);
-    }
-}
+// Hero* search(Hero* root, int id) {
+//     if (root == NULL || root->data.id == id) {
+//         return root;
+//     } else if (id < root->data.id) {
+//         return search(root->left, id);
+//     } else {
+//         return search(root->right, id);
+//     }
+// }
 
 // Function to display the contents of the database
 void displayDatabase(Hero* root) {

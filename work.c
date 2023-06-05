@@ -159,11 +159,11 @@ int main(){
        if(a=='c'){
 
         
-        do{
-            printf("enter the charging :"); //charging
         
-            scanf("%d", &charging);
-        }while (~(0<=charging<=99));
+        printf("enter the charging :"); //charging
+        
+        scanf("%d", &charging);
+        
         
         
         
@@ -172,20 +172,22 @@ int main(){
         
         char* pointer=(char*)malloc(50*sizeof(char));
         scanf("%s", pointer);
-        printf("enter last name");
+        printf("enter last name :");
         char* ointer=(char*)malloc(50*sizeof(char));
         scanf("%s", ointer);
        
 
         
-        two:
-        printf("Enter the amount of charging to be done");
+      
         int tobecharged; //must be greater than that of charging
+        
+        printf("Enter the amount of charging to be done :");
+        
         scanf("%d",&tobecharged);
         int diff=tobecharged-charging;
 
         EV* ptr=(EV*)malloc(sizeof(EV));
-        initEV(charging, tobecharged,diff,timing, ptr, pointer,ointer);
+        initEV(charging, tobecharged,diff, ptr, pointer,ointer);
        
         if(charging<30){
             Station* tempo=minmeantimehigh(s1,s2,s3, arr1, arr2, arr3);
