@@ -12,6 +12,11 @@ int counting;
 int ID=0;
 
 
+
+// Declare findMinimum function
+
+
+
 Station* minmeantimehigh(Station* p1,Station* p2, Station* p3, Node* arr1[], Node* arr2[], Node* arr3[]){
     if(arrayfullhigh(arr1)){
         return p1;
@@ -109,9 +114,6 @@ Station* minmeantimelow(Station* p1, Station* p2, Station* p3, Node* arr1[], Nod
     
     return minStation;
 }
-
-
-
 
 
 
@@ -441,6 +443,17 @@ int main(){
             }
 
         }
+        else if(a=='n'){
+            int id;
+            printf("enter the id you want to delete");
+            scanf("%d",&id);
+            deleteNode(root, id);
+            
+
+        }
+        
+
+        
 
         }
     }

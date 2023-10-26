@@ -1,7 +1,8 @@
-<<<<<<< HEAD
+
 #ifndef __P_H__
 #define __P_H__
-
+#include<stdio.h>
+#include<stdlib.h>
 
 
 
@@ -9,7 +10,7 @@ typedef struct EV_user{
     char* lastname; //
     char* username;//
     int charging;//
-    int timing; //not using this
+    int timing; //
     int tobecharged;//
     int diff;//
 
@@ -17,7 +18,7 @@ typedef struct EV_user{
 //
 typedef struct Node {
     int data; //not needed
-    int chargingtime;////////////////////Not needed
+    int chargingtime;
     int priority;
     struct Node* next;
     EV* ev;
@@ -173,18 +174,51 @@ Hero* insert(Hero* root, Record data) {
     }
     return root;
 }
+Hero* findMinimum(Hero* node) {
+    Hero* current = node;
+
+    while (current && current->left != NULL) {
+        current = current->left;
+    }
+
+    return current;
+}
+Hero* deleteNode(Hero* root, int id) {
+    if (root == NULL) {
+        return root; // Empty tree, nothing to delete
+    }
+
+    // Search for the node with the specified ID
+    if (id < root->data.id) {
+        root->left = deleteNode(root->left, id);
+    } else if (id > root->data.id) {
+        root->right = deleteNode(root->right, id);
+    } else {
+        // Node with the specified ID found
+        if (root->left == NULL) {
+            Hero* temp = root->right;
+            free(root);
+            return temp;
+        } else if (root->right == NULL) {
+            Hero* temp = root->left;
+            free(root);
+            return temp;
+        }
+
+        // Node has two children
+        Hero* temp = findMinimum(root->right); // Find the minimum node in the right subtree
+        root->data = temp->data; // Copy the data of the minimum node
+        root->right = deleteNode(root->right, temp->data.id); // Delete the minimum node
+    }
+
+    return root; // Return the updated tree
+}
+
+// Function to delete a record from the BST by ID
 
 
-// Function to search for a record in the BST
-// Hero* search(Hero* root, int id) {
-//     if (root == NULL || root->data.id == id) {
-//         return root;
-//     } else if (id < root->data.id) {
-//         return search(root->left, id);
-//     } else {
-//         return search(root->right, id);
-//     }
-// }
+
+
 
 // Function to display the contents of the database
 void displayDatabase(Hero* root) {
@@ -212,10 +246,13 @@ int arrayfulllow(Node* arr[]){
     }
 }
 
+
+
     
 
 
 #endif
+<<<<<<< HEAD
 =======
 #ifndef __P_H__
 #define __P_H__
@@ -437,3 +474,5 @@ int arrayfulllow(Node* arr[]){
 
 #endif
 >>>>>>> 1c88e7cd6fc13d15274f8ee924be75604995d3c0
+=======
+>>>>>>> Pranav
