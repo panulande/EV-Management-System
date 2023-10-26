@@ -10,7 +10,7 @@ typedef struct EV_user{
     char* lastname; //
     char* username;//
     int charging;//
-    int timing; //not using this
+    int timing; //
     int tobecharged;//
     int diff;//
 
@@ -18,7 +18,7 @@ typedef struct EV_user{
 //
 typedef struct Node {
     int data; //not needed
-    int chargingtime;////////////////////Not needed
+    int chargingtime;
     int priority;
     struct Node* next;
     EV* ev;
