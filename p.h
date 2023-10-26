@@ -254,9 +254,11 @@ typedef struct PriorityQueue {
 // Initializes a new priority queue
 PriorityQueue* initPriorityQueue() {
     PriorityQueue * queue = malloc(sizeof(PriorityQueue));
+
+    
     queue->head = NULL;
     return queue;
-}
+} 
 typedef struct Station{
     PriorityQueue* high;
     PriorityQueue* low;
