@@ -10,7 +10,7 @@ typedef struct EV_user{
     char* lastname; //
     char* username;//
     int charging;//
-    int timing; //not using this
+    int timing; //
     int tobecharged;//
     int diff;//
 
@@ -18,7 +18,7 @@ typedef struct EV_user{
 //
 typedef struct Node {
     int data; //not needed
-    int chargingtime;////////////////////Not needed
+    int chargingtime;
     int priority;
     struct Node* next;
     EV* ev;
@@ -237,6 +237,19 @@ int arrayfullhigh(Node* arr[]){
         return 1;
     }
 }
+// Function to search for a node in the BST by ID
+Hero* searchNode(Hero* root, int id) {
+    if (root == NULL || root->data.id == id) {
+        return root;
+    }
+
+    if (id < root->data.id) {
+        return searchNode(root->left, id); // Search in the left subtree
+    } else {
+        return searchNode(root->right, id); // Search in the right subtree
+    }
+}
+
 int arrayfulllow(Node* arr[]){
        if ((arr[1] != NULL) && (arr[3] != NULL))
     {
